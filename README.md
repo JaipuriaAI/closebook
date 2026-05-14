@@ -1,6 +1,6 @@
 # finance-billing
 
-A public Claude skill from **Jaipuria AI Labs**.
+A public Claude skill from **Rehearsal AI**.
 
 A five-layer recipe that turns a monthly credit card or bank statement PDF into reimbursement-ready CSVs — categorized, totaled, marked-up, taxed, bill-to blocks attached, and self-verified before it ever reaches you.
 
@@ -92,7 +92,7 @@ Metadata bundle (ready to paste):
 | **Category** | Finance / Productivity / Small Business |
 | **Tags** | finance, accounting, monthly-close, expense-management, reimbursement, gst, invoicing, csv, pdf-parsing, india |
 | **Install URL** | `https://finance-billing-bice.vercel.app/SKILL.md` |
-| **Author** | Jaipuria AI Labs |
+| **Author** | Rehearsal AI |
 | **License** | MIT |
 | **Source** | Link to this GitHub repo |
 
@@ -153,4 +153,4 @@ If you ship an improvement, a PR is appreciated but not required.
 
 ## Credits
 
-Built by **Jaipuria AI Labs**. Extracted from a real monthly-close workflow and verified for three months side-by-side against the manual workflow before the manual version was retired. No discrepancies in production runs after the switchover.
+Built by **Rehearsal AI**. Extracted from a real monthly-close workflow and verified for three months side-by-side against the manual workflow before the manual version was retired. No discrepancies in production runs after the switchover.

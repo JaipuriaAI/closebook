@@ -217,4 +217,4 @@ Verified for three months side-by-side against the manual workflow before the ma
 
 ## Credits
 
-Built by Jaipuria AI Labs. Free to use, modify, and republish. If you ship an improvement, a PR or a note back to the lab is appreciated but not required.
+Built by Rehearsal AI. Free to use, modify, and republish. If you ship an improvement, a PR or a note back to the lab is appreciated but not required.
