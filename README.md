@@ -15,7 +15,7 @@ User-scope (available across all your Claude Code projects):
 ```bash
 mkdir -p ~/.claude/skills/finance-billing && \
   curl -o ~/.claude/skills/finance-billing/SKILL.md \
-  https://finance-billing.jaipurialabs.ai/SKILL.md
+  https://finance-billing-bice.vercel.app/SKILL.md
 ```
 
 Project-scope (only for the current project):
@@ -23,10 +23,8 @@ Project-scope (only for the current project):
 ```bash
 mkdir -p .claude/skills/finance-billing && \
   curl -o .claude/skills/finance-billing/SKILL.md \
-  https://finance-billing.jaipurialabs.ai/SKILL.md
+  https://finance-billing-bice.vercel.app/SKILL.md
 ```
-
-Replace the URL with the actual deployed domain once you set it.
 
 Then, in any Claude Code session:
 
@@ -61,12 +59,14 @@ npx vercel --prod
 
 Follow the prompts. Vercel detects the static folder and deploys with zero config.
 
-To set a custom domain (e.g. `finance-billing.jaipurialabs.ai`):
+The live deployment is at https://finance-billing-bice.vercel.app.
+
+To attach a custom domain (e.g. `finance-billing.yourdomain.com`):
 
 1. Add the domain in the Vercel project settings.
 2. Add the matching DNS record at your domain registrar.
-3. Edit `landing/index.html` and update the install snippets to use your domain.
-4. `npx vercel --prod` again to redeploy.
+3. Edit `landing/index.html` and `README.md` to swap the Vercel URL for your domain.
+4. Commit and push — Vercel auto-redeploys from the GitHub integration.
 
 ### Updating the skill later
 
@@ -91,7 +91,7 @@ Metadata bundle (ready to paste):
 | **Tagline** | Turn a monthly statement PDF into reimbursement-ready CSVs. Self-verified. |
 | **Category** | Finance / Productivity / Small Business |
 | **Tags** | finance, accounting, monthly-close, expense-management, reimbursement, gst, invoicing, csv, pdf-parsing, india |
-| **Install URL** | `https://finance-billing.jaipurialabs.ai/SKILL.md` (update once deployed) |
+| **Install URL** | `https://finance-billing-bice.vercel.app/SKILL.md` |
 | **Author** | Jaipuria AI Labs |
 | **License** | MIT |
 | **Source** | Link to this GitHub repo |
@@ -101,7 +101,7 @@ Install command (paste-and-run, suitable for the marketplace listing):
 ```bash
 mkdir -p ~/.claude/skills/finance-billing && \
   curl -o ~/.claude/skills/finance-billing/SKILL.md \
-  https://finance-billing.jaipurialabs.ai/SKILL.md
+  https://finance-billing-bice.vercel.app/SKILL.md
 ```
 
 ---
