@@ -10,7 +10,7 @@
 *.swp
 
 # User configs that should never be committed
-finance-billing-config.yaml
+closebook-config.yaml
 *.pdf
 *.csv
 *.xlsx

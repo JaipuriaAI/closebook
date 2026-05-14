@@ -1,4 +1,4 @@
-# finance-billing
+# closebook
 
 A public Claude skill from **Rehearsal AI**.
 
@@ -13,24 +13,24 @@ You define the buckets, the merchant rules, the markup %, the tax %, and the bil
 User-scope (available across all your Claude Code projects):
 
 ```bash
-mkdir -p ~/.claude/skills/finance-billing && \
-  curl -o ~/.claude/skills/finance-billing/SKILL.md \
-  https://finance-billing-bice.vercel.app/SKILL.md
+mkdir -p ~/.claude/skills/closebook && \
+  curl -o ~/.claude/skills/closebook/SKILL.md \
+  https://closebook-bice.vercel.app/SKILL.md
 ```
 
 Project-scope (only for the current project):
 
 ```bash
-mkdir -p .claude/skills/finance-billing && \
-  curl -o .claude/skills/finance-billing/SKILL.md \
-  https://finance-billing-bice.vercel.app/SKILL.md
+mkdir -p .claude/skills/closebook && \
+  curl -o .claude/skills/closebook/SKILL.md \
+  https://closebook-bice.vercel.app/SKILL.md
 ```
 
 Then, in any Claude Code session:
 
-> *Process this statement with the finance-billing skill: path-to-statement.pdf*
+> *Process this statement with the closebook skill: path-to-statement.pdf*
 
-On first run the skill walks you through a one-time config wizard (buckets, merchant rules, markup %, tax %, bill-to blocks, exclusion list) and saves it to `finance-billing-config.yaml` in the working directory.
+On first run the skill walks you through a one-time config wizard (buckets, merchant rules, markup %, tax %, bill-to blocks, exclusion list) and saves it to `closebook-config.yaml` in the working directory.
 
 ---
 
@@ -59,9 +59,9 @@ npx vercel --prod
 
 Follow the prompts. Vercel detects the static folder and deploys with zero config.
 
-The live deployment is at https://finance-billing-bice.vercel.app.
+The live deployment is at https://closebook-bice.vercel.app.
 
-To attach a custom domain (e.g. `finance-billing.yourdomain.com`):
+To attach a custom domain (e.g. `closebook.yourdomain.com`):
 
 1. Add the domain in the Vercel project settings.
 2. Add the matching DNS record at your domain registrar.
@@ -87,11 +87,11 @@ Metadata bundle (ready to paste):
 
 | Field | Value |
 |-------|-------|
-| **Name** | `finance-billing` |
+| **Name** | `closebook` |
 | **Tagline** | Turn a monthly statement PDF into reimbursement-ready CSVs. Self-verified. |
 | **Category** | Finance / Productivity / Small Business |
 | **Tags** | finance, accounting, monthly-close, expense-management, reimbursement, gst, invoicing, csv, pdf-parsing, india |
-| **Install URL** | `https://finance-billing-bice.vercel.app/SKILL.md` |
+| **Install URL** | `https://closebook-bice.vercel.app/SKILL.md` |
 | **Author** | Rehearsal AI |
 | **License** | MIT |
 | **Source** | Link to this GitHub repo |
@@ -99,9 +99,9 @@ Metadata bundle (ready to paste):
 Install command (paste-and-run, suitable for the marketplace listing):
 
 ```bash
-mkdir -p ~/.claude/skills/finance-billing && \
-  curl -o ~/.claude/skills/finance-billing/SKILL.md \
-  https://finance-billing-bice.vercel.app/SKILL.md
+mkdir -p ~/.claude/skills/closebook && \
+  curl -o ~/.claude/skills/closebook/SKILL.md \
+  https://closebook-bice.vercel.app/SKILL.md
 ```
 
 ---
@@ -139,7 +139,7 @@ The decisions are yours. The typing is the skill's.
 - **Buckets**: none — defined by you at first run
 - **Exclusion list**: empty — grows as you tell the skill about rows it should drop
 
-All of this lives in `finance-billing-config.yaml` in your working directory. Nothing is hard-coded into the skill. Nothing leaves your machine.
+All of this lives in `closebook-config.yaml` in your working directory. Nothing is hard-coded into the skill. Nothing leaves your machine.
 
 ---
 

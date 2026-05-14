@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>finance-billing — a Claude skill by Rehearsal AI</title>
+<title>closebook — a Claude skill by Rehearsal AI</title>
 <meta name="description" content="A five-layer recipe that turns a monthly credit card statement PDF into reimbursement-ready CSVs. Configurable buckets, markup, tax, bill-to blocks, and a self-verification pass." />
-<meta property="og:title" content="finance-billing — a Claude skill" />
+<meta property="og:title" content="closebook — a Claude skill" />
 <meta property="og:description" content="Replace ~15 days of monthly finance typing with a 1.5-page recipe. Open, configurable, free." />
 <style>
   :root {
@@ -195,7 +195,7 @@
 <main>
   <header>
     <p class="lab-mark">Rehearsal AI · An open Claude skill</p>
-    <h1><code>finance-billing</code></h1>
+    <h1><code>closebook</code></h1>
     <p class="lede">A five-layer recipe that turns a monthly credit card or bank statement PDF into reimbursement-ready CSVs. You define the buckets, the markup, the tax, and the bill-to blocks once. The recipe runs the same way every month after.</p>
     <div class="cta-row">
       <button id="copy-btn">Copy SKILL.md</button>
@@ -252,21 +252,21 @@ Grand Total         = Reimbursement + Markup + Tax</code></pre>
   <p>This is a Claude Code skill. You'll need Claude Code installed locally.</p>
 
   <h3>Option A — User-scope (recommended)</h3>
-  <pre><code>mkdir -p ~/.claude/skills/finance-billing
-curl -o ~/.claude/skills/finance-billing/SKILL.md \
-  https://finance-billing-bice.vercel.app/SKILL.md</code></pre>
+  <pre><code>mkdir -p ~/.claude/skills/closebook
+curl -o ~/.claude/skills/closebook/SKILL.md \
+  https://closebook-bice.vercel.app/SKILL.md</code></pre>
 
   <h3>Option B — Project-scope</h3>
-  <pre><code>mkdir -p .claude/skills/finance-billing
-curl -o .claude/skills/finance-billing/SKILL.md \
-  https://finance-billing-bice.vercel.app/SKILL.md</code></pre>
+  <pre><code>mkdir -p .claude/skills/closebook
+curl -o .claude/skills/closebook/SKILL.md \
+  https://closebook-bice.vercel.app/SKILL.md</code></pre>
 
   <h3>Option C — Manual</h3>
-  <p>Click <strong>Copy SKILL.md</strong> above, paste into a new file at <code>~/.claude/skills/finance-billing/SKILL.md</code>, save.</p>
+  <p>Click <strong>Copy SKILL.md</strong> above, paste into a new file at <code>~/.claude/skills/closebook/SKILL.md</code>, save.</p>
 
   <h2>Then, in any Claude Code session</h2>
-  <pre><code>Process this statement with the finance-billing skill: <em>path-to-statement.pdf</em></code></pre>
-  <p>On first run, the skill walks you through a one-time config wizard — buckets, merchant rules, markup %, tax %, bill-to blocks, exclusion list. It saves your config to <code>finance-billing-config.yaml</code> in the working directory. Every subsequent run loads the config and just asks you about edge cases.</p>
+  <pre><code>Process this statement with the closebook skill: <em>path-to-statement.pdf</em></code></pre>
+  <p>On first run, the skill walks you through a one-time config wizard — buckets, merchant rules, markup %, tax %, bill-to blocks, exclusion list. It saves your config to <code>closebook-config.yaml</code> in the working directory. Every subsequent run loads the config and just asks you about edge cases.</p>
 
   <h2>What this skill is not</h2>
   <ul>
