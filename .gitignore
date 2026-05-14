@@ -1,0 +1,24 @@
+# Vercel
+.vercel/
+
+# macOS
+.DS_Store
+
+# Editor noise
+.idea/
+.vscode/
+*.swp
+
+# User configs that should never be committed
+finance-billing-config.yaml
+*.pdf
+*.csv
+*.xlsx
+_excluded.csv
+_personal.csv
+_verification.txt
+
+# Node (only relevant if a build step is added later)
+node_modules/
+npm-debug.log
+yarn-error.log

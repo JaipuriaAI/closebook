@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>finance-billing — a Claude skill by Jaipuria AI Labs</title>
+<meta name="description" content="A five-layer recipe that turns a monthly credit card statement PDF into reimbursement-ready CSVs. Configurable buckets, markup, tax, bill-to blocks, and a self-verification pass." />
+<meta property="og:title" content="finance-billing — a Claude skill" />
+<meta property="og:description" content="Replace ~15 days of monthly finance typing with a 1.5-page recipe. Open, configurable, free." />
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --paper: #fbfaf6;
+    --paper-warm: #f3efe4;
+    --rule: #d9d3c3;
+    --accent: #8a5a00;
+    --accent-soft: #e8d9b3;
+    --code-bg: #efeadb;
+    --max-width: 720px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  main { max-width: var(--max-width); margin: 0 auto; padding: 64px 28px 96px; }
+  header { border-bottom: 1px solid var(--rule); padding-bottom: 28px; margin-bottom: 40px; }
+  .lab-mark {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+    font-weight: 600;
+  }
+  h1 {
+    font-family: "Iowan Old Style", "Charter", Georgia, serif;
+    font-size: 44px;
+    line-height: 1.1;
+    margin: 0 0 16px;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  h1 code {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    background: var(--accent-soft);
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: 500;
+  }
+  .lede {
+    font-size: 19px;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+    max-width: 600px;
+  }
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-top: 6px;
+  }
+  button, .button-link {
+    font: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.15s, color 0.15s;
+  }
+  button:hover, .button-link:hover { background: var(--accent); border-color: var(--accent); }
+  .button-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--rule);
+  }
+  .button-secondary:hover { background: var(--paper-warm); color: var(--ink); border-color: var(--ink); }
+  h2 {
+    font-family: "Iowan Old Style", "Charter", Georgia, serif;
+    font-size: 26px;
+    margin: 56px 0 16px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  h3 {
+    font-size: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 32px 0 8px;
+    font-weight: 600;
+  }
+  p { margin: 0 0 14px; }
+  ul { padding-left: 22px; margin: 8px 0 18px; }
+  li { margin-bottom: 6px; }
+  code, kbd {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.92em;
+    background: var(--code-bg);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+  pre {
+    background: var(--code-bg);
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 22px;
+    border-left: 3px solid var(--accent);
+  }
+  pre code { background: none; padding: 0; font-size: inherit; }
+  .layers { counter-reset: layer; margin: 24px 0 0; }
+  .layer {
+    counter-increment: layer;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .layer:first-child { border-top: none; padding-top: 0; }
+  .layer-num {
+    font-family: "Iowan Old Style", "Charter", Georgia, serif;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 4px;
+    font-weight: 600;
+  }
+  .layer-num::before { content: "Layer " counter(layer) " — "; }
+  .layer h4 {
+    font-family: "Iowan Old Style", "Charter", Georgia, serif;
+    font-size: 22px;
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+  blockquote {
+    margin: 24px 0;
+    padding: 14px 20px;
+    border-left: 3px solid var(--accent);
+    font-style: italic;
+    color: var(--ink-soft);
+    background: var(--paper-warm);
+    border-radius: 0 4px 4px 0;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { text-decoration: none; }
+  footer {
+    margin-top: 80px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  footer p { margin: 0 0 8px; }
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @media (max-width: 540px) {
+    main { padding: 40px 22px 64px; }
+    h1 { font-size: 32px; }
+    .lede { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="lab-mark">Jaipuria AI Labs · An open Claude skill</p>
+    <h1><code>finance-billing</code></h1>
+    <p class="lede">A five-layer recipe that turns a monthly credit card or bank statement PDF into reimbursement-ready CSVs. You define the buckets, the markup, the tax, and the bill-to blocks once. The recipe runs the same way every month after.</p>
+    <div class="cta-row">
+      <button id="copy-btn">Copy SKILL.md</button>
+      <a class="button-link button-secondary" href="./SKILL.md" download>Download SKILL.md</a>
+      <a class="button-link button-secondary" href="#install">Install instructions</a>
+    </div>
+  </header>
+
+  <h2>The story behind it</h2>
+  <p>Every month, a credit card statement arrives. The numbers aren't large. Nothing in it is complicated. But you know what's coming: three tabs, careful typing, mental gymnastics about which vendor goes in which bucket, refunds to remove, a tax calc your invoice template doesn't do automatically, and a CA who will reliably find three things you got slightly wrong.</p>
+  <p>What looked, from the outside, like fifteen days of finance work was actually about an hour of decisions and fourteen-and-a-half days of typing those decisions out in slightly different formats for slightly different audiences.</p>
+  <blockquote><p>The carefulness wasn't fifteen days deep. It was about an hour deep — the part where I actually made the decisions. The other fourteen-and-a-half days were typing.</p></blockquote>
+  <p>This skill is the recipe. Written down once. Run every month after.</p>
+  <p><a href="#" id="article-link">Read the full essay on Medium →</a></p>
+
+  <h2>The five layers</h2>
+  <p>The skill does exactly five things, in order. Skip any one of them and you have a parlour trick. Build all five — especially the last — and you have a workflow you can actually run a monthly close on.</p>
+
+  <div class="layers">
+    <div class="layer">
+      <p class="layer-num"></p>
+      <h4>Extract</h4>
+      <p>Open the statement PDF. Take every debit. Drop every credit. Capture date, merchant, foreign-currency amount (if any), home-currency amount. Use the bank's transaction date, never a downstream date.</p>
+    </div>
+    <div class="layer">
+      <p class="layer-num"></p>
+      <h4>Categorize</h4>
+      <p>Each remaining row goes into exactly one bucket. Buckets are defined by you at first run — two is common, five is the most this should ever be. If a merchant doesn't match, the skill asks you and remembers the answer.</p>
+    </div>
+    <div class="layer">
+      <p class="layer-num"></p>
+      <h4>Math</h4>
+      <p>Four lines per bucket:</p>
+      <pre><code>Reimbursement       = sum of row amounts in this bucket
+Markup              = Reimbursement × markup_pct
+Tax on markup       = Markup × tax_pct
+Grand Total         = Reimbursement + Markup + Tax</code></pre>
+      <p>Defaults: 8% markup, 18% tax (India GST). Both configurable. Use 0% tax for non-tax jurisdictions.</p>
+    </div>
+    <div class="layer">
+      <p class="layer-num"></p>
+      <h4>Bill-to blocks</h4>
+      <p>You supply your legal name, address, and tax ID once. The skill attaches the right block to every output CSV. You never retype an address again.</p>
+    </div>
+    <div class="layer">
+      <p class="layer-num"></p>
+      <h4>Self-verification</h4>
+      <p>Before showing you anything, the skill runs ten checks against its own output: debit-count parity, zero credits, bucket-sum integrity, markup arithmetic to the rupee, tax arithmetic to the rupee, grand-total arithmetic to the rupee, bill-to completeness, forex line items, no double-bucketed rows, exclusions logged.</p>
+      <p>If any check fails, no CSV ships. The skill surfaces the failing check with the rows and the math, and stops.</p>
+    </div>
+  </div>
+
+  <h2 id="install">Install</h2>
+  <p>This is a Claude Code skill. You'll need Claude Code installed locally.</p>
+
+  <h3>Option A — User-scope (recommended)</h3>
+  <pre><code>mkdir -p ~/.claude/skills/finance-billing
+curl -o ~/.claude/skills/finance-billing/SKILL.md \
+  https://finance-billing.jaipurialabs.ai/SKILL.md
+# Replace the URL with wherever this page is actually hosted.</code></pre>
+
+  <h3>Option B — Project-scope</h3>
+  <pre><code>mkdir -p .claude/skills/finance-billing
+curl -o .claude/skills/finance-billing/SKILL.md \
+  https://finance-billing.jaipurialabs.ai/SKILL.md</code></pre>
+
+  <h3>Option C — Manual</h3>
+  <p>Click <strong>Copy SKILL.md</strong> above, paste into a new file at <code>~/.claude/skills/finance-billing/SKILL.md</code>, save.</p>
+
+  <h2>Then, in any Claude Code session</h2>
+  <pre><code>Process this statement with the finance-billing skill: <em>path-to-statement.pdf</em></code></pre>
+  <p>On first run, the skill walks you through a one-time config wizard — buckets, merchant rules, markup %, tax %, bill-to blocks, exclusion list. It saves your config to <code>finance-billing-config.yaml</code> in the working directory. Every subsequent run loads the config and just asks you about edge cases.</p>
+
+  <h2>What this skill is not</h2>
+  <ul>
+    <li>It does not categorize for you. You define the buckets and the merchant rules.</li>
+    <li>It does not pick the markup. The markup is a business decision; you supply the number.</li>
+    <li>It does not file invoices, send emails, or post journal entries. It produces clean CSVs that paste into whatever invoice or accounting software you use.</li>
+    <li>It does not learn new exclusion rules without your approval. Every new merchant prompts a confirmation.</li>
+  </ul>
+  <p>The decisions are yours. The typing is the skill's.</p>
+
+  <h2>License & contributions</h2>
+  <p>Open. Free to use, modify, and republish. If you ship an improvement, a PR or a note back to the lab is appreciated but not required.</p>
+
+  <footer>
+    <p><strong>Jaipuria AI Labs</strong> · Open Claude skills for small businesses, faculty, and analysts.</p>
+    <p>Verified for three months side-by-side against the original manual workflow before retirement. No discrepancies in production runs after the switchover.</p>
+  </footer>
+</main>
+
+<div class="toast" id="toast">SKILL.md copied to clipboard</div>
+
+<script>
+  const copyBtn = document.getElementById('copy-btn');
+  const toast = document.getElementById('toast');
+  const articleLink = document.getElementById('article-link');
+
+  // Update the article link if you have a Medium URL — paste it here:
+  // articleLink.href = "https://medium.com/@your-handle/your-essay";
+
+  copyBtn.addEventListener('click', async () => {
+    try {
+      const res = await fetch('./SKILL.md');
+      const text = await res.text();
+      await navigator.clipboard.writeText(text);
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    } catch (e) {
+      toast.textContent = "Couldn't copy — open SKILL.md manually.";
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+  });
+</script>
+</body>
+</html>
