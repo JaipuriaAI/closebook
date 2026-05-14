@@ -15,7 +15,7 @@ User-scope (available across all your Claude Code projects):
 ```bash
 mkdir -p ~/.claude/skills/closebook && \
   curl -o ~/.claude/skills/closebook/SKILL.md \
-  https://closebook-bice.vercel.app/SKILL.md
+  https://closebook-two.vercel.app/SKILL.md
 ```
 
 Project-scope (only for the current project):
@@ -23,7 +23,7 @@ Project-scope (only for the current project):
 ```bash
 mkdir -p .claude/skills/closebook && \
   curl -o .claude/skills/closebook/SKILL.md \
-  https://closebook-bice.vercel.app/SKILL.md
+  https://closebook-two.vercel.app/SKILL.md
 ```
 
 Then, in any Claude Code session:
@@ -59,7 +59,7 @@ npx vercel --prod
 
 Follow the prompts. Vercel detects the static folder and deploys with zero config.
 
-The live deployment is at https://closebook-bice.vercel.app.
+The live deployment is at https://closebook-two.vercel.app.
 
 To attach a custom domain (e.g. `closebook.yourdomain.com`):
 
@@ -91,7 +91,7 @@ Metadata bundle (ready to paste):
 | **Tagline** | Turn a monthly statement PDF into reimbursement-ready CSVs. Self-verified. |
 | **Category** | Finance / Productivity / Small Business |
 | **Tags** | finance, accounting, monthly-close, expense-management, reimbursement, gst, invoicing, csv, pdf-parsing, india |
-| **Install URL** | `https://closebook-bice.vercel.app/SKILL.md` |
+| **Install URL** | `https://closebook-two.vercel.app/SKILL.md` |
 | **Author** | Rehearsal AI |
 | **License** | MIT |
 | **Source** | Link to this GitHub repo |
@@ -101,7 +101,7 @@ Install command (paste-and-run, suitable for the marketplace listing):
 ```bash
 mkdir -p ~/.claude/skills/closebook && \
   curl -o ~/.claude/skills/closebook/SKILL.md \
-  https://closebook-bice.vercel.app/SKILL.md
+  https://closebook-two.vercel.app/SKILL.md
 ```
 
 ---
