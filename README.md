@@ -70,10 +70,10 @@ To attach a custom domain (e.g. `closebook.yourdomain.com`):
 
 ### Updating the skill later
 
-Edit `skill/SKILL.md`, then:
+Edit `closebook/SKILL.md`, then:
 
 ```bash
-cp skill/SKILL.md landing/SKILL.md   # mirror to the landing folder
+cp closebook/SKILL.md landing/SKILL.md   # mirror to the landing folder
 cd landing && npx vercel --prod
 ```
 
@@ -116,7 +116,7 @@ The skill does exactly five things, in order. Skip any one and you have a parlou
 4. **Bill-to blocks** — attach the legal name, address, and tax ID you supplied once. Never retyped.
 5. **Self-verification** — ten arithmetic + integrity checks run against the skill's own output before anything is shown to you. If any check fails, no CSV ships.
 
-Read the full breakdown in [`skill/SKILL.md`](./skill/SKILL.md).
+Read the full breakdown in [`closebook/SKILL.md`](./closebook/SKILL.md).
 
 ---
 
