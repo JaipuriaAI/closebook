@@ -1,9 +1,9 @@
 ---
-name: finance
+name: closebook
 description: "Turn a monthly credit card or bank statement PDF into reimbursement-ready CSVs with markup, tax, bill-to blocks, and a self-verification pass. You define the buckets, the merchant rules, the markup %, the tax %, and the bill-to blocks once — the skill runs the recipe every month after. Generic, configurable version of a workflow that replaced ~15 days of monthly finance work for a small business. Triggers on monthly close, credit card statement processing, expense categorization, reimbursement invoicing, vendor bucketing, or bill-to-block generation."
 ---
 
-# Finance
+# Closebook
 
 A five-layer recipe for turning a credit card or bank statement PDF into reimbursement-ready CSVs — categorized, totaled, marked-up, taxed, bill-to blocks attached, and self-verified before it ever reaches you.
 
@@ -12,8 +12,8 @@ This skill exists because most monthly-close work isn't finance. It's typing. On
 ## How to use
 
 1. Drop a statement PDF (or a path to one) into the chat.
-2. Tell Claude: *"Process this statement with the finance skill."*
-3. On first run, the skill will ask you for the **config bundle** (buckets, merchant rules, markup %, tax %, bill-to blocks, exclusion list). It will save these to `finance-config.yaml` in the working directory.
+2. Tell Claude: *"Process this statement with the closebook skill."*
+3. On first run, the skill will ask you for the **config bundle** (buckets, merchant rules, markup %, tax %, bill-to blocks, exclusion list). It will save these to `closebook-config.yaml` in the working directory.
 4. On every subsequent run, the skill loads the saved config and just asks you to confirm any edge cases.
 
 ## Layer 1 — Extract
@@ -30,7 +30,7 @@ From the statement PDF:
 
 ### Layer 1b — Exclusion list (config)
 
-Stored in `finance-config.yaml` under `exclusions:`. Examples of what users typically put here (don't include any of these by default — ask the user):
+Stored in `closebook-config.yaml` under `exclusions:`. Examples of what users typically put here (don't include any of these by default — ask the user):
 
 ```yaml
 exclusions:
@@ -187,7 +187,7 @@ BILL TO:
 
 ## First-run config wizard
 
-If `finance-config.yaml` is not present in the working directory, the skill walks the user through:
+If `closebook-config.yaml` is not present in the working directory, the skill walks the user through:
 
 1. How many buckets? Name each.
 2. For each bucket: is it billable? List a few sample merchants (more can be added later as Claude prompts on unmatched merchants).
